@@ -18,10 +18,15 @@ const reactionSchema = new mongoose.Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-        },
+            get: timestamp => new Date(timestamp).toLocaleString()
+        }
+        
+    },
+    {
+        _id: false
     }
 )
 
-const Reaction = mongoose.model('reaction', reactionSchema)
 
-module.exports = Reaction
+
+module.exports = reactionSchema
