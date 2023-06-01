@@ -39,13 +39,26 @@ router.delete('/:userID', (req, res) => {
     .catch((err) => res.status(500).json(err));
 })
 
-router.post('/:userID/friends/:friendID', (req, res) => {
-    User.findOneAndUpdate(
-        { _id: req.params.userID },
-        { $push: {friends: req.params.friendID} }
-    )
-    .then((user) => res.json(user))
-    .catch((err) => res.status(500).json(err));
+// Add friend
+router.post('/:userID/friends/:friendID', (req, res) => {    
+    const userID = req.params.userID;
+    const friendID = req.params.friendID;
+
+    const updateFriendPromise = User.findOneAndUpdate(
+        { _id: friendID },
+        { $push: { friends: userID } }
+    ).exec();
+
+    const updateUserPromise = User.findOneAndUpdate(
+        { _id: userID },
+        { $push: { friends: friendID } }
+    ).exec();
+
+    Promise.all([updateFriendPromise, updateUserPromise])
+        .then(([updatedFriend, updatedUser]) => {
+            res.json({ updatedFriend, updatedUser });
+        })
+        .catch((err) => res.status(500).json(err));
 })
 
 module.exports = router
