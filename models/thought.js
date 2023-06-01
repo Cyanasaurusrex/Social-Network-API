@@ -10,9 +10,9 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: () => new Date()
-            // TODO finish date formatting
-        },
+            default: Date.now,
+             // TODO finish date formatting
+        },    
         username: {
             type: String,
             required: true

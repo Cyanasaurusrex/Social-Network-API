@@ -16,7 +16,12 @@ async function seedData() {
         username: "JohnDoe",
         email: "hello@world.com",
         friends: []
-    }) 
+    })
+    await User.create({
+        username: "JohnDoe1",
+        email: "hello1@world.com",
+        friends: []
+    })
     await thought.create({
         thoughtText: "Hello World!",
         username: "JohnDoe"
