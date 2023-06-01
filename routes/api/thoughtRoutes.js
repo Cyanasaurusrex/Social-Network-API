@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Thought = require('../../models/thought')
 const User = require('../../models/user')
+const Reaction = require('../../models/reaction')
+const mongoose = require('mongoose')
 
 // finds all thoughts
 router.get('/', (req, res) => {
@@ -59,11 +61,24 @@ router.delete('/:thoughtID', (req, res) => {
     .catch((err) => res.status(500).json(err));
 })
 
+router.post('/:thoughtID/reactions', (req, res) => {
+  const thoughtID = req.params.thoughtID;
+  const reactionData = req.body;
+  const reaction = new Reaction(reactionData);
 
+  Thought.findByIdAndUpdate(
+    thoughtID,
+    { $push: { reactions: reaction } },
+    { new: true }
+  )
+    .then((thought) => {
+      if (!thought) {
+        return res.status(404).json({ message: 'Thought not found' });
+      }
+      res.json(thought);
+    })
+    .catch((err) => res.status(500).json(err));
 
-
-
-
-
+})
 
 module.exports = router

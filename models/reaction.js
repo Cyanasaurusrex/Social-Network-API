@@ -4,7 +4,7 @@ const reactionSchema = new mongoose.Schema(
     {
         reactionId: {
             type: mongoose.Schema.Types.ObjectId,
-            default: mongoose.Types.ObjectId
+            default: new mongoose.Types.ObjectId
         },
         reactionBody: {
             type: String,
@@ -27,6 +27,6 @@ const reactionSchema = new mongoose.Schema(
     }
 )
 
+const Reaction = mongoose.model('Reaction', reactionSchema)
 
-
-module.exports = reactionSchema
+module.exports = Reaction
