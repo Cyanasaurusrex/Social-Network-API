@@ -1,5 +1,10 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./reaction.js')
+const dayjs = require('dayjs')
+require('dayjs/plugin/customParseFormat');
+const currentDateTime = dayjs();
+
+
 
 const thoughtSchema = new Schema(
     {
@@ -10,9 +15,8 @@ const thoughtSchema = new Schema(
             maxlength: 280
         },
         createdAt: {
-            type: Date,
-            default: Date.now,
-            get: timestamp => new Date(timestamp).toLocaleString()
+            type: String,
+            default: currentDateTime.format('MMM DD, YYYY [at] h:mm A')       
         },    
         username: {
             type: String,

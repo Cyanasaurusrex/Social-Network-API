@@ -2,7 +2,8 @@ const router = require('express').Router();
 const Thought = require('../../models/thought')
 const User = require('../../models/user')
 const Reaction = require('../../models/reaction')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const thought = require('../../models/thought');
 
 // finds all thoughts
 router.get('/', (req, res) => {
@@ -61,6 +62,7 @@ router.delete('/:thoughtID', (req, res) => {
     .catch((err) => res.status(500).json(err));
 })
 
+// Add reaction
 router.post('/:thoughtID/reactions', (req, res) => {
   const thoughtID = req.params.thoughtID;
   const reactionData = req.body;
@@ -78,7 +80,32 @@ router.post('/:thoughtID/reactions', (req, res) => {
       res.json(thought);
     })
     .catch((err) => res.status(500).json(err));
-
 })
+
+// Remove reaction
+router.delete('/:thoughtID/reactions/:reactionId', async (req, res) => {
+  try {
+    const { thoughtID, reactionId } = req.params;
+    const post = await Thought.findById(thoughtID);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+    let index = -1
+    for (let i=0; i < post.reactions.length; i++) {
+      if (post.reactions[i].reactionId == reactionId) {
+        index = i
+        break
+      }
+    }
+    if (index != -1 ) {
+      post.reactions.splice(index, 1)
+      await post.save()
+      res.json({ message: 'Reaction deleted' });
+    }
+  } catch (error) {
+    console.error('Error deleting reaction:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 module.exports = router
