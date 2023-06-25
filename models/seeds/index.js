@@ -13,17 +13,17 @@ connection.once("open", async () => {
 
 async function seedData() {
     await User.create({
-        username: "JohnDoe",
-        email: "hello@world.com",
+        username: "MasterChief",
+        email: "Master@Chief.com",
         friends: []
     })
     await User.create({
-        username: "JohnDoe1",
-        email: "hello1@world.com",
+        username: "JohnSnow",
+        email: "John@Snow.com",
         friends: []
     })
     await thought.create({
         thoughtText: "Hello World!",
-        username: "JohnDoe"
+        username: "MasterChief"
     })
 }
