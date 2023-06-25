@@ -1,13 +1,13 @@
-![GitHub license](https://img.shields.io/badge/license-MIT-yellow.svg)
+[![GitHub license](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Social Network API
 
 ![](/assets/img1.png)
 
 ## Technologies Used
 [![JavaScript](https://img.shields.io/badge/JavaScript-yellow)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![MongoDB](https://img.shields.io/badge/MongoDB-red)]()
-[![Mongoose](https://img.shields.io/badge/Mongoose-lime)]()
-[![Insomnia](https://img.shields.io/badge/Insomnia-purple)]()
+[![MongoDB](https://img.shields.io/badge/MongoDB-red)](https://www.mongodb.com/)
+[![Mongoose](https://img.shields.io/badge/Mongoose-lime)](https://www.npmjs.com/package/mongoose)
+[![Insomnia](https://img.shields.io/badge/Insomnia-purple)](https://insomnia.rest/)
 
     
 ## Description
